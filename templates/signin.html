@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <form action="" method="post">
+        <input type="hidden",name="'csrfmiddlewaretoken" value="{{ csrf_token }}">
+{#        以上这句需要在settings.py中的TEMPLATES下加一个'django.template.context_processors.csrf'中间件，用于一些非表单提交处的csrf防御#}
+        {% csrf_token %}
+{#        以上这句用于表单中的csrf防御#}
+        <table>
+            <tbody>
+                <tr>
+                    <td>用户名：</td>
+                    <td><input type="text" name="username"></td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td><input type="text" name="password"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="提交"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <ul>
+                            {% for message in messages %}
+                                <li>
+                                    {{ message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+{% endblock %}
